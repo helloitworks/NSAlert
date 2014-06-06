@@ -14,6 +14,8 @@
 {
     // Insert code here to initialize your application
 }
+
+//采用Window的方式展示
 - (IBAction)ShowNSAlertWindow:(id)sender
 {
     
@@ -24,6 +26,7 @@
                          informativeTextWithFormat:@"informativeText"];
     
     NSUInteger action = [alert runModal];
+    //响应window的按钮事件
     if(action == NSAlertDefaultReturn)
     {
         NSLog(@"defaultButton clicked!");
@@ -40,6 +43,7 @@
 }
 
 
+//采用Sheet的方式展示
 - (IBAction)ShowNSAlertSheet:(id)sender
 {
     NSMutableDictionary * extrasDict = [[NSMutableDictionary alloc] init];
@@ -58,12 +62,13 @@
 }
 
 
-- (void)alertSheetDidEnd:(NSAlert *)alert
-                         returnCode:(NSInteger)returnCode
-                        contextInfo:(void *)contextInfo {
+//响应Sheet的按钮事件
+- (void)alertSheetDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
     if (returnCode == NSAlertDefaultReturn)
     {
         NSLog(@"alternateButton clicked!");
+        //show you how to use contextInfo
         //__bridge_transfer for arc
         NSString *url = [(__bridge NSDictionary*)contextInfo objectForKey:@"link"];
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
